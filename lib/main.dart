@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_motion/shared_axis.dart';
 
@@ -39,19 +40,32 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: _getBody(_currentIndex),
+      body: PageTransitionSwitcher(
+        transitionBuilder: (
+          Widget child,
+          Animation<double> animation,
+          Animation<double> secondaryAnimation,
+        ) {
+          return FadeThroughTransition(
+            animation: animation,
+            secondaryAnimation: secondaryAnimation,
+            child: child,
+          );
+        },
+        child: _getBody(_currentIndex),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.brush),
+            icon: Icon(Icons.open_in_new),
             title: Text('Container'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            title: Text('Axis'),
+            icon: Icon(Icons.last_page),
+            title: Text('Shared Axis'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
+            icon: Icon(Icons.blur_on),
             title: Text('Fade'),
           ),
         ],
@@ -77,9 +91,15 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Expanded(child: Text('One'),),
-              Expanded(child: Text('Two'),),
-              Expanded(child: Text('Three'),)
+              Expanded(
+                child: Text('One'),
+              ),
+              Expanded(
+                child: Text('Two'),
+              ),
+              Expanded(
+                child: Text('Three'),
+              )
             ],
           ),
         );
