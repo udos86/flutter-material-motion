@@ -17,9 +17,7 @@ class _FadeScaleWidgetState extends State<FadeScaleWidget>
       duration: const Duration(milliseconds: 500),
       reverseDuration: const Duration(milliseconds: 500),
       vsync: this,
-    )..addStatusListener((AnimationStatus status) {
-        setState(() {});
-      });
+    )..addStatusListener((AnimationStatus status) => setState(() {}));
     super.initState();
   }
 
@@ -81,7 +79,7 @@ class _AlertDialog extends StatelessWidget {
         ),
         FlatButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: const Text('DISCARD'),
+          child: const Text('OK'),
         ),
       ],
     );
