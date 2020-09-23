@@ -27,7 +27,7 @@ class _SharedAxisWidgetState extends State<SharedAxisWidget> {
                 child: child,
                 animation: animation,
                 secondaryAnimation: secondaryAnimation,
-                transitionType: SharedAxisTransitionType.scaled,
+                transitionType: SharedAxisTransitionType.horizontal,
               );
             },
             child: StepWidget(

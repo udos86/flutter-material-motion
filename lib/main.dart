@@ -1,5 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_material_motion/fade_scale.dart';
 import 'package:flutter_material_motion/shared_axis.dart';
 
 import 'container_transform.dart';
@@ -66,7 +67,7 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.blur_on),
-            title: Text('Fade'),
+            title: Text('Fade Scale'),
           ),
         ],
         currentIndex: _currentIndex,
@@ -86,23 +87,7 @@ class _HomePageState extends State<HomePage> {
       case 1:
         return SharedAxisWidget();
       case 2:
-        return Container(
-          color: Colors.red,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: Text('One'),
-              ),
-              Expanded(
-                child: Text('Two'),
-              ),
-              Expanded(
-                child: Text('Three'),
-              )
-            ],
-          ),
-        );
+        return FadeScaleWidget();
       default:
         throw Exception('Invalid index');
     }
