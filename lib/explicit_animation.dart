@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class ExplicitAnimationWidget extends StatefulWidget {
   @override
-  _ExplicitAnimationWidgetState createState() => _ExplicitAnimationWidgetState();
+  _ExplicitAnimationWidgetState createState() =>
+      _ExplicitAnimationWidgetState();
 }
 
 class _ExplicitAnimationWidgetState extends State<ExplicitAnimationWidget>
@@ -33,28 +34,34 @@ class _ExplicitAnimationWidgetState extends State<ExplicitAnimationWidget>
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox.expand(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          AnimatedBuilder(
-            animation: _controller,
-            builder: (BuildContext context, Widget child) {
-              return CircularProgressIndicator(
-                valueColor: _animation,
-                value: _controller.value,
-              );
-            },
-          ),
-          RaisedButton(
-            child: Text('TOGGLE ANIMATION'),
-            onPressed: () {
-              final forward = _controller.status == AnimationStatus.dismissed ||
-                  _controller.status == AnimationStatus.reverse;
-              forward ? _controller.forward() : _controller.reverse();
-            },
-          )
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Explicit Animation Demo'),
+      ),
+      body: SizedBox.expand(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AnimatedBuilder(
+              animation: _controller,
+              builder: (BuildContext context, Widget child) {
+                return CircularProgressIndicator(
+                  valueColor: _animation,
+                  value: _controller.value,
+                );
+              },
+            ),
+            RaisedButton(
+              child: Text('TOGGLE ANIMATION'),
+              onPressed: () {
+                final forward =
+                    _controller.status == AnimationStatus.dismissed ||
+                        _controller.status == AnimationStatus.reverse;
+                forward ? _controller.forward() : _controller.reverse();
+              },
+            )
+          ],
+        ),
       ),
     );
   }

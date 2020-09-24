@@ -1,7 +1,8 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_material_motion/fade_scale.dart';
-import 'package:flutter_material_motion/shared_axis.dart';
+import 'package:flutter_material_motion/fade_scale_transition.dart';
+import 'package:flutter_material_motion/shared_axis_transition.dart';
+import 'package:flutter_material_motion/slivers.dart';
 
 import 'container_transform.dart';
 
