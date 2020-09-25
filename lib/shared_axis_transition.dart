@@ -1,61 +1,68 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 
-class SharedAxisWidget extends StatefulWidget {
+class SharedAxisTransitionScreen extends StatefulWidget {
   @override
-  _SharedAxisWidgetState createState() => _SharedAxisWidgetState();
+  _SharedAxisTransitionScreenState createState() =>
+      _SharedAxisTransitionScreenState();
 }
 
-class _SharedAxisWidgetState extends State<SharedAxisWidget> {
+class _SharedAxisTransitionScreenState
+    extends State<SharedAxisTransitionScreen> {
   int _step = 0;
   bool reverse = false;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: PageTransitionSwitcher(
-            duration: const Duration(milliseconds: 500),
-            reverse: reverse,
-            transitionBuilder: (
-              Widget child,
-              Animation<double> animation,
-              Animation<double> secondaryAnimation,
-            ) {
-              return SharedAxisTransition(
-                child: child,
-                animation: animation,
-                secondaryAnimation: secondaryAnimation,
-                transitionType: SharedAxisTransitionType.horizontal,
-              );
-            },
-            child: StepWidget(
-              key: Key(_step.toString()),
-              index: _step,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Shared Axis Transition Demo'),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: PageTransitionSwitcher(
+              duration: const Duration(milliseconds: 500),
+              reverse: reverse,
+              transitionBuilder: (
+                Widget child,
+                Animation<double> animation,
+                Animation<double> secondaryAnimation,
+              ) {
+                return SharedAxisTransition(
+                  child: child,
+                  animation: animation,
+                  secondaryAnimation: secondaryAnimation,
+                  transitionType: SharedAxisTransitionType.horizontal,
+                );
+              },
+              child: StepWidget(
+                key: Key(_step.toString()),
+                index: _step,
+              ),
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              FlatButton(
-                onPressed: _step > 0 ? _stepDown : null,
-                textColor: Theme.of(context).colorScheme.primary,
-                child: const Text('BACK'),
-              ),
-              RaisedButton(
-                onPressed: _stepUp,
-                color: Theme.of(context).colorScheme.primary,
-                textColor: Theme.of(context).colorScheme.onPrimary,
-                child: const Text('NEXT'),
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                FlatButton(
+                  onPressed: _step > 0 ? _stepDown : null,
+                  textColor: Theme.of(context).colorScheme.primary,
+                  child: const Text('BACK'),
+                ),
+                RaisedButton(
+                  onPressed: _stepUp,
+                  color: Theme.of(context).colorScheme.primary,
+                  textColor: Theme.of(context).colorScheme.onPrimary,
+                  child: const Text('NEXT'),
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

@@ -1,10 +1,11 @@
-import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_material_motion/explicit_animation.dart';
 import 'package:flutter_material_motion/fade_scale_transition.dart';
+import 'package:flutter_material_motion/implicit_animation.dart';
 import 'package:flutter_material_motion/shared_axis_transition.dart';
 import 'package:flutter_material_motion/slivers.dart';
-
 import 'container_transform.dart';
+import 'fade_through_transition.dart';
 
 void main() {
   runApp(App());
@@ -19,78 +20,80 @@ class App extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(title: 'Flutter Material Motion Demo Page'),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => MainScreen(),
+        ...routes.fold({}, (map, route) {
+          map.putIfAbsent(route['path'], () => route['builder']);
+          return map;
+        }),
+      },
     );
   }
 }
 
-class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
-
+class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text('Flutter Material Motion Demo'),
       ),
-      body: PageTransitionSwitcher(
-        transitionBuilder: (
-          Widget child,
-          Animation<double> animation,
-          Animation<double> secondaryAnimation,
-        ) {
-          return FadeThroughTransition(
-            animation: animation,
-            secondaryAnimation: secondaryAnimation,
-            child: child,
-          );
-        },
-        child: _getBody(_currentIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.open_in_new),
-            title: Text('Container'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.last_page),
-            title: Text('Shared Axis'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.blur_on),
-            title: Text('Fade Scale'),
-          ),
+      body: ListView(
+        children: [
+          for (final route in routes)
+            Column(
+              children: [
+                ListTile(
+                  title: Text(route['title']),
+                  onTap: () => Navigator.pushNamed(context, route['path']),
+                ),
+                Divider(
+                  thickness: 1.0,
+                  height: 1.0,
+                ),
+              ],
+            ),
         ],
-        currentIndex: _currentIndex,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
       ),
     );
   }
-
-  Widget _getBody(int index) {
-    switch (index) {
-      case 0:
-        return ContainerTransformWidget();
-      case 1:
-        return SharedAxisWidget();
-      case 2:
-        return FadeScaleWidget();
-      default:
-        throw Exception('Invalid index');
-    }
-  }
 }
+
+final routes = [
+  {
+    'path': '/implicit-animations',
+    'title': 'Implicit Animations',
+    'builder': (context) => ImplicitAnimationScreen(),
+  },
+  {
+    'path': '/explicit-animations',
+    'title': 'Explicit Animations',
+    'builder': (context) => ExplicitAnimationScreen(),
+  },
+  {
+    'path': '/container-transform',
+    'title': 'Container Transform',
+    'builder': (context) => ContainerTransformScreen(),
+  },
+  {
+    'path': '/shared-axis-transition',
+    'title': 'Shared Axis Transition',
+    'builder': (context) => SharedAxisTransitionScreen(),
+  },
+  {
+    'path': '/fade-scale-transition',
+    'title': 'Fade Scale Transition',
+    'builder': (context) => FadeScaleTransitionScreen(),
+  },
+  {
+    'path': '/fade-through-transition',
+    'title': 'Fade Through Transition',
+    'builder': (context) => FadeThroughTransitionScreen(),
+  },
+  {
+    'path': '/slivers',
+    'title': 'Slivers',
+    'builder': (context) => SliversScreen(),
+  },
+];

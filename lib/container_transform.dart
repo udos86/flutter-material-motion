@@ -3,47 +3,52 @@ import 'dart:math';
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 
-class ContainerTransformWidget extends StatelessWidget {
+class ContainerTransformScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      itemCount: 25,
-      separatorBuilder: (BuildContext context, int index) => Divider(
-        height: 1,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Container Transform Demo'),
       ),
-      itemBuilder: (context, index) {
-        final Color color =
-            Colors.primaries[Random().nextInt(Colors.primaries.length)];
+      body: ListView.separated(
+        itemCount: 25,
+        separatorBuilder: (BuildContext context, int index) => Divider(
+          height: 1,
+        ),
+        itemBuilder: (context, index) {
+          final Color color =
+              Colors.primaries[Random().nextInt(Colors.primaries.length)];
 
-        return OpenContainer(
-          tappable: false,
-          closedShape: const RoundedRectangleBorder(),
-          closedElevation: 0.0,
-          closedBuilder: (context, openContainer) {
-            return ListTile(
-              title: Text(_colorToString(color)),
-              leading: Container(
-                height: 32.0,
-                width: 32.0,
-                color: color,
-              ),
-              onTap: openContainer,
-            );
-          },
-          openBuilder: (context, closeContainer) {
-            return Scaffold(
-              appBar: AppBar(
+          return OpenContainer(
+            tappable: false,
+            closedShape: const RoundedRectangleBorder(),
+            closedElevation: 0.0,
+            closedBuilder: (context, openContainer) {
+              return ListTile(
                 title: Text(_colorToString(color)),
-              ),
-              body: SizedBox.expand(
-                child: Container(
+                leading: Container(
+                  height: 32.0,
+                  width: 32.0,
                   color: color,
                 ),
-              ),
-            );
-          },
-        );
-      },
+                onTap: openContainer,
+              );
+            },
+            openBuilder: (context, closeContainer) {
+              return Scaffold(
+                appBar: AppBar(
+                  title: Text(_colorToString(color)),
+                ),
+                body: SizedBox.expand(
+                  child: Container(
+                    color: color,
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 

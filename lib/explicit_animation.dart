@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class ExplicitAnimationWidget extends StatefulWidget {
+class ExplicitAnimationScreen extends StatefulWidget {
   @override
-  _ExplicitAnimationWidgetState createState() =>
-      _ExplicitAnimationWidgetState();
+  _ExplicitAnimationScreenState createState() =>
+      _ExplicitAnimationScreenState();
 }
 
-class _ExplicitAnimationWidgetState extends State<ExplicitAnimationWidget>
+class _ExplicitAnimationScreenState extends State<ExplicitAnimationScreen>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation<Color> _animation;
@@ -36,7 +36,7 @@ class _ExplicitAnimationWidgetState extends State<ExplicitAnimationWidget>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Explicit Animation Demo'),
+        title: const Text('Explicit Animations Demo'),
       ),
       body: SizedBox.expand(
         child: Column(
@@ -45,9 +45,14 @@ class _ExplicitAnimationWidgetState extends State<ExplicitAnimationWidget>
             AnimatedBuilder(
               animation: _controller,
               builder: (BuildContext context, Widget child) {
-                return CircularProgressIndicator(
-                  valueColor: _animation,
-                  value: _controller.value,
+                return SizedBox(
+                  width: 72.0,
+                  height: 72.0,
+                  child: CircularProgressIndicator(
+                    valueColor: _animation,
+                    value: _controller.value,
+                    strokeWidth: 6.0,
+                  ),
                 );
               },
             ),
