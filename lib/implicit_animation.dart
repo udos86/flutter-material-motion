@@ -8,13 +8,37 @@ class ImplicitAnimationScreen extends StatefulWidget {
 }
 
 class _ImplicitAnimationScreenState extends State<ImplicitAnimationScreen> {
+  Alignment _alignment = Alignment.topLeft;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Implicit Animations Demo'),
       ),
-      body: Container(),
+      body: AnimatedAlign(
+        duration: Duration(seconds: 1),
+        alignment: _alignment,
+        child: CircleAvatar(
+          radius: 48.0,
+          child: Text(
+            '1',
+            style: TextStyle(
+              fontSize: 36.0,
+            ),
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.touch_app),
+        onPressed: () {
+          setState(() {
+            _alignment = _alignment == Alignment.topLeft
+                ? Alignment.center
+                : Alignment.topLeft;
+          });
+        },
+      ),
     );
   }
 }
