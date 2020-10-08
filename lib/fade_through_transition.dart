@@ -50,15 +50,15 @@ class _FadeThroughTransitionScreenState
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.open_in_new),
-            title: Text('Tab 1'),
+            label: 'Tab 1',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.last_page),
-            title: Text('Tab 2'),
+            label: 'Tab 2',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.blur_on),
-            title: Text('Tab 3'),
+            label: 'Tab 3',
           ),
         ],
         currentIndex: _currentIndex,

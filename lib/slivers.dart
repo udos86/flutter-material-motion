@@ -17,7 +17,7 @@ class SliversScreen extends StatelessWidget {
             expandedHeight: 320.0,
             backgroundColor: Colors.grey,
             flexibleSpace: FlexibleSpaceBar(
-              title: const Text('Title'),
+              title: const Text('Slivers Demo'),
               centerTitle: true,
               background: FlutterLogo(),
             ),
