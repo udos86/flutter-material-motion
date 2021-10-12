@@ -2,9 +2,9 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 
 class FadeThroughTransitionScreen extends StatefulWidget {
-  FadeThroughTransitionScreen({Key key, this.title}) : super(key: key);
-
-  final String title;
+  const FadeThroughTransitionScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _FadeThroughTransitionScreenState createState() =>
@@ -19,7 +19,7 @@ class _FadeThroughTransitionScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fade Through Transition Demo'),
+        title: const Text('Fade Through Transition Demo'),
       ),
       body: PageTransitionSwitcher(
         transitionBuilder: (
@@ -39,7 +39,7 @@ class _FadeThroughTransitionScreenState
             radius: 48.0,
             child: Text(
               '${_currentIndex + 1}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 36.0,
               ),
             ),

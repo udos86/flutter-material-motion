@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ExplicitAnimationScreen extends StatefulWidget {
+  const ExplicitAnimationScreen({
+    Key? key,
+  }) : super(key: key);
+
   @override
   _ExplicitAnimationScreenState createState() =>
       _ExplicitAnimationScreenState();
@@ -8,8 +12,8 @@ class ExplicitAnimationScreen extends StatefulWidget {
 
 class _ExplicitAnimationScreenState extends State<ExplicitAnimationScreen>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<Color> _animation;
+  late AnimationController _controller;
+  late Animation<Color?> _animation;
 
   @override
   void initState() {
@@ -44,7 +48,7 @@ class _ExplicitAnimationScreenState extends State<ExplicitAnimationScreen>
           children: [
             AnimatedBuilder(
               animation: _controller,
-              builder: (BuildContext context, Widget child) {
+              builder: (BuildContext context, Widget? child) {
                 return SizedBox(
                   width: 72.0,
                   height: 72.0,
@@ -56,8 +60,8 @@ class _ExplicitAnimationScreenState extends State<ExplicitAnimationScreen>
                 );
               },
             ),
-            RaisedButton(
-              child: Text('TOGGLE ANIMATION'),
+            ElevatedButton(
+              child: const Text('TOGGLE ANIMATION'),
               onPressed: () {
                 final forward =
                     _controller.status == AnimationStatus.dismissed ||

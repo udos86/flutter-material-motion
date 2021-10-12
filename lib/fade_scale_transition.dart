@@ -2,6 +2,10 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 
 class FadeScaleTransitionScreen extends StatefulWidget {
+  const FadeScaleTransitionScreen({
+    Key? key,
+  }) : super(key: key);
+
   @override
   _FadeScaleTransitionScreenState createState() =>
       _FadeScaleTransitionScreenState();
@@ -9,7 +13,7 @@ class FadeScaleTransitionScreen extends StatefulWidget {
 
 class _FadeScaleTransitionScreenState extends State<FadeScaleTransitionScreen>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
 
   @override
   void initState() {
@@ -38,7 +42,7 @@ class _FadeScaleTransitionScreenState extends State<FadeScaleTransitionScreen>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            RaisedButton(
+            ElevatedButton(
               onPressed: () {
                 final forward = _controller.status == AnimationStatus.dismissed;
                 forward ? _controller.forward() : _controller.reverse();
@@ -47,15 +51,16 @@ class _FadeScaleTransitionScreenState extends State<FadeScaleTransitionScreen>
             ),
             AnimatedBuilder(
               animation: _controller,
-              builder: (BuildContext context, Widget child) {
+              builder: (BuildContext context, Widget? child) {
                 return FadeScaleTransition(
                   animation: _controller,
                   child: child,
                 );
               },
               child: Opacity(
-                opacity: _controller.status != AnimationStatus.dismissed ? 1 : 0,
-                child: RaisedButton(
+                opacity:
+                    _controller.status != AnimationStatus.dismissed ? 1 : 0,
+                child: ElevatedButton(
                   child: const Text('SHOW MODAL'),
                   onPressed: () {
                     showModal<void>(
@@ -79,11 +84,11 @@ class _AlertDialog extends StatelessWidget {
     return AlertDialog(
       content: const Text('Alert Dialog'),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           onPressed: () => Navigator.of(context).pop(),
           child: const Text('CANCEL'),
         ),
-        FlatButton(
+        TextButton(
           onPressed: () => Navigator.of(context).pop(),
           child: const Text('OK'),
         ),

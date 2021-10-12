@@ -2,6 +2,10 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 
 class SharedAxisTransitionScreen extends StatefulWidget {
+  const SharedAxisTransitionScreen({
+    Key? key,
+  }) : super(key: key);
+
   @override
   _SharedAxisTransitionScreenState createState() =>
       _SharedAxisTransitionScreenState();
@@ -14,6 +18,8 @@ class _SharedAxisTransitionScreenState
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Shared Axis Transition Demo'),
@@ -47,15 +53,19 @@ class _SharedAxisTransitionScreenState
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                FlatButton(
+                TextButton(
+                  style: TextButton.styleFrom(
+                    primary: colorScheme.primary,
+                  ),
                   onPressed: _step > 0 ? _stepDown : null,
-                  textColor: Theme.of(context).colorScheme.primary,
                   child: const Text('BACK'),
                 ),
-                RaisedButton(
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: colorScheme.primary,
+                    onPrimary: colorScheme.onPrimary,
+                  ),
                   onPressed: _stepUp,
-                  color: Theme.of(context).colorScheme.primary,
-                  textColor: Theme.of(context).colorScheme.onPrimary,
                   child: const Text('NEXT'),
                 ),
               ],
@@ -82,46 +92,42 @@ class _SharedAxisTransitionScreenState
 }
 
 class StepWidget extends StatelessWidget {
-  StepWidget({
-    Key key,
-    @required this.index,
+  const StepWidget({
+    Key? key,
+    required this.index,
   }) : super(key: key);
 
   final int index;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            child: CircleAvatar(
-              radius: 48.0,
-              child: Text(
-                '$index',
-                style: TextStyle(
-                  fontSize: 36.0,
-                ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        CircleAvatar(
+          radius: 48.0,
+          child: Text(
+            '$index',
+            style: const TextStyle(
+              fontSize: 36.0,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 16.0,
+          ),
+          child: Center(
+            child: Text(
+              'Step $index',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 24.0,
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: 16.0,
-            ),
-            child: Center(
-              child: Text(
-                'Step $index',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24.0,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

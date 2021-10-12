@@ -3,13 +3,17 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class SliversScreen extends StatelessWidget {
+  const SliversScreen({
+    Key? key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //appBar: AppBar(title: const Text('Slivers Demo')),
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
+          const SliverAppBar(
             // title: const Text('Sliver App Bar'),
             pinned: true,
             //floating: true,
@@ -17,7 +21,7 @@ class SliversScreen extends StatelessWidget {
             expandedHeight: 320.0,
             backgroundColor: Colors.grey,
             flexibleSpace: FlexibleSpaceBar(
-              title: const Text('Slivers Demo'),
+              title: Text('Slivers Demo'),
               centerTitle: true,
               background: FlutterLogo(),
             ),
@@ -33,7 +37,7 @@ class SliversScreen extends StatelessWidget {
             ),
           ),
           SliverGrid(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 4.0,
               mainAxisSpacing: 4.0,
@@ -62,9 +66,9 @@ class SliversScreen extends StatelessWidget {
 class CustomSliverPersistentHeaderDelegate
     extends SliverPersistentHeaderDelegate {
   CustomSliverPersistentHeaderDelegate({
-    @required this.child,
-    @required this.maxHeight,
-    @required this.minHeight,
+    required this.child,
+    required this.maxHeight,
+    required this.minHeight,
   });
 
   final Widget child;
@@ -80,7 +84,7 @@ class CustomSliverPersistentHeaderDelegate
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return new SizedBox.expand(child: child);
+    return SizedBox.expand(child: child);
   }
 
   @override
@@ -92,7 +96,10 @@ class CustomSliverPersistentHeaderDelegate
 }
 
 class CustomSliverWidget extends StatefulWidget {
-  CustomSliverWidget({Key key, this.title}) : super(key: key);
+  const CustomSliverWidget({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
 
   final String title;
 
@@ -134,7 +141,7 @@ class _CustomSliverWidgetState extends State<CustomSliverWidget> {
           onTap: () {
             _scrollController.animateTo(
               offset,
-              duration: Duration(milliseconds: 350),
+              duration: const Duration(milliseconds: 350),
               curve: Curves.easeOut,
             );
           },
@@ -153,7 +160,7 @@ class _CustomSliverWidgetState extends State<CustomSliverWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Custom Sliver Header Demo'),
+        title: const Text('Custom Sliver Header Demo'),
       ),
       body: CustomScrollView(
         controller: _scrollController,

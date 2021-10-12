@@ -2,6 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ImplicitAnimationScreen extends StatefulWidget {
+  const ImplicitAnimationScreen({
+    Key? key,
+  }) : super(key: key);
+
   @override
   _ImplicitAnimationScreenState createState() =>
       _ImplicitAnimationScreenState();
@@ -17,9 +21,9 @@ class _ImplicitAnimationScreenState extends State<ImplicitAnimationScreen> {
         title: const Text('Implicit Animations Demo'),
       ),
       body: AnimatedAlign(
-        duration: Duration(seconds: 1),
+        duration: const Duration(seconds: 1),
         alignment: _alignment,
-        child: CircleAvatar(
+        child: const CircleAvatar(
           radius: 48.0,
           child: Text(
             '1',
@@ -30,7 +34,7 @@ class _ImplicitAnimationScreenState extends State<ImplicitAnimationScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.touch_app),
+        child: const Icon(Icons.touch_app),
         onPressed: () {
           setState(() {
             _alignment = _alignment == Alignment.topLeft

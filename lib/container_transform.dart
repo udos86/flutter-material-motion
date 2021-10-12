@@ -4,6 +4,10 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 
 class ContainerTransformScreen extends StatelessWidget {
+  const ContainerTransformScreen({
+    Key? key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,7 +16,7 @@ class ContainerTransformScreen extends StatelessWidget {
       ),
       body: ListView.separated(
         itemCount: 25,
-        separatorBuilder: (BuildContext context, int index) => Divider(
+        separatorBuilder: (BuildContext context, int index) => const Divider(
           height: 1,
         ),
         itemBuilder: (context, index) {
